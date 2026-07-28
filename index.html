@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SPADARO | Camisas premium</title>
+    <meta
+      name="description"
+      content="Camisas SPADARO para vestir con presencia: cortes limpios, telas seleccionadas y detalles de sastreria."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header" data-header>
+      <a class="brand" href="#inicio" aria-label="SPADARO inicio">
+        <img
+          class="brand-logo brand-logo-light"
+          src="assets/spadaro-firma-blanca.png"
+          alt="SPADARO"
+        />
+        <img
+          class="brand-logo brand-logo-dark"
+          src="assets/spadaro-firma-blanca.png"
+          alt=""
+          aria-hidden="true"
+        />
+      </a>
+      <nav class="main-nav" aria-label="Principal">
+        <a href="#coleccion">Coleccion</a>
+        <a href="#tallas">Tallas</a>
+        <a href="#pedido">Pedido</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-button theme-toggle" type="button" aria-label="Activar modo oscuro" data-theme-toggle>
+          <span class="theme-icon sun-icon" aria-hidden="true"></span>
+          <span class="theme-icon moon-icon" aria-hidden="true"></span>
+        </button>
+        <button class="icon-button cart-toggle" type="button" aria-label="Abrir carrito" data-cart-open>
+          <span class="bag-icon" aria-hidden="true"></span>
+          <span class="cart-count" data-cart-count>0</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="inicio">
+        <img
+          class="hero-image"
+          src="assets/spadaro-archivio-01-hero.png"
+          alt="Collage artístico de arte, arquitectura y simbolismo para ARCHIVIO 01 de SPADARO"
+        />
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="hero-content">
+          <img
+            class="hero-logo"
+            src="assets/spadaro-logo-solo.png"
+            alt="SPADARO"
+          />
+          <p class="hero-kicker">ARCHIVIO 01 · CREAZIONE</p>
+          <p class="hero-copy">
+            La primera página de nuestra historia. Una colección inspirada en el origen
+            de todas las cosas, donde el arte, la arquitectura y el simbolismo se
+            encuentran para dar vida a la visión de SPADARO.
+          </p>
+          <p class="hero-availability">Disponible ahora.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#coleccion">Comprar camisas</a>
+            <a class="button ghost" href="#pedido">Pedido personalizado</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="intro-band" aria-label="Beneficios de SPADARO">
+        <article>
+          <strong>Algodon seleccionado</strong>
+          <span>Tacto fresco, estructura limpia y caida elegante.</span>
+        </article>
+        <article>
+          <strong>Corte favorecedor</strong>
+          <span>Silueta definida sin perder comodidad.</span>
+        </article>
+        <article>
+          <strong>Listas para destacar</strong>
+          <span>Del dia de oficina a la noche sin cambiar el ritmo.</span>
+        </article>
+      </section>
+
+      <section class="collection" id="coleccion">
+        <img
+          class="collection-emblem"
+          src="assets/spadaro-logo-vertical-black.png"
+          alt=""
+          aria-hidden="true"
+        />
+        <div class="section-heading">
+          <p class="eyebrow">Coleccion esencial</p>
+          <h2>ARCHIVIO 01: CREAZIONE</h2>
+          <p>
+            La colección que marca el comienzo de SPADARO. Descubre cada pieza
+          </p>
+        </div>
+
+        <div class="product-grid" data-products></div>
+      </section>
+
+      <section class="fit-section" id="tallas">
+        <div class="fit-copy">
+          <p class="eyebrow">Tallas y ajuste</p>
+          <h2>El detalle correcto se nota antes de decir una palabra</h2>
+          <p>
+            Recomendamos escoger tu talla usual para un ajuste limpio. Si estas entre
+            dos tallas, elige la mayor para un look relajado o la menor para una silueta
+            mas definida.
+          </p>
+        </div>
+        <img
+          class="fit-emblem"
+          src="assets/spadaro-logo-vertical-white.png"
+          alt=""
+          aria-hidden="true"
+        />
+        <div class="size-table" role="table" aria-label="Guia de tallas SPADARO">
+          <div role="row">
+            <span role="columnheader">Talla</span>
+            <span role="columnheader">Pecho</span>
+            <span role="columnheader">Cuello</span>
+          </div>
+          <div role="row">
+            <span role="cell">S</span>
+            <span role="cell">92-96 cm</span>
+            <span role="cell">37-38 cm</span>
+          </div>
+          <div role="row">
+            <span role="cell">M</span>
+            <span role="cell">97-102 cm</span>
+            <span role="cell">39-40 cm</span>
+          </div>
+          <div role="row">
+            <span role="cell">L</span>
+            <span role="cell">103-108 cm</span>
+            <span role="cell">41-42 cm</span>
+          </div>
+          <div role="row">
+            <span role="cell">XL</span>
+            <span role="cell">109-116 cm</span>
+            <span role="cell">43-44 cm</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="order-section" id="pedido">
+        <div>
+          <p class="eyebrow">Compra directa</p>
+          <h2>Haz tu pedido sin vueltas</h2>
+          <p>
+            Agrega tus camisas favoritas al carrito y envia el resumen. Podemos confirmar
+            disponibilidad, colores y entrega por mensaje.
+          </p>
+        </div>
+        <button class="button primary" type="button" data-cart-open>Ver carrito</button>
+      </section>
+    </main>
+
+    <aside class="cart-panel" aria-label="Carrito de compras" aria-hidden="true" data-cart-panel>
+      <div class="cart-header">
+        <div>
+          <p class="eyebrow">Tu seleccion</p>
+          <h2>Carrito</h2>
+        </div>
+        <button class="icon-button" type="button" aria-label="Cerrar carrito" data-cart-close>
+          <span aria-hidden="true">x</span>
+        </button>
+      </div>
+      <div class="cart-items" data-cart-items></div>
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Total estimado</span>
+          <strong data-cart-total>$0</strong>
+        </div>
+        <a class="button primary full" href="#" data-whatsapp>Enviar pedido</a>
+      </div>
+    </aside>
+    <div class="overlay" data-overlay></div>
+
+    <footer class="site-footer">
+      <img src="assets/spadaro-logo-horizontal-white.png" alt="SPADARO" />
+      <a href="#inicio">Volver arriba</a>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

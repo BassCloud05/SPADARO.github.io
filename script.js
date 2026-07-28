@@ -1,0 +1,268 @@
+const products = [
+  {
+    id: "lux",
+    name: "LUX",
+    price: 59900,
+    image: "assets/archivio-01-lux.png",
+    blackImage: "assets/archivio-01-lux-black.png",
+    frontImage: "assets/archivio-front-white.png",
+    blackFrontImage: "assets/archivio-front-black.png",
+    description: "El primer destello que rompio la oscuridad e inicio toda la creacion.",
+    colors: ["Blanco", "Negro"],
+  },
+  {
+    id: "firmamentum",
+    name: "FIRMAMENTUM",
+    price: 59900,
+    image: "assets/archivio-02-firmamentum.png",
+    blackImage: "assets/archivio-02-firmamentum-black.png",
+    frontImage: "assets/archivio-front-white.png",
+    blackFrontImage: "assets/archivio-front-black.png",
+    description: "La inmensidad del cielo donde el universo comenzo a tomar forma.",
+    colors: ["Blanco", "Negro"],
+  },
+  {
+    id: "principium",
+    name: "PRINCIPIUM",
+    price: 59900,
+    image: "assets/archivio-03-principium.png",
+    blackImage: "assets/archivio-03-principium-black.png",
+    frontImage: "assets/archivio-front-white.png",
+    blackFrontImage: "assets/archivio-front-black.png",
+    description: "El instante en que el caos encontro orden, equilibrio y proposito.",
+    colors: ["Blanco", "Negro"],
+  },
+  {
+    id: "astra",
+    name: "ASTRA",
+    price: 59900,
+    image: "assets/archivio-04-astra.png",
+    blackImage: "assets/archivio-04-astra-black.png",
+    frontImage: "assets/archivio-front-white.png",
+    blackFrontImage: "assets/archivio-front-black.png",
+    description: "Los astros que marcaron el tiempo y guiaron la historia de la humanidad.",
+    colors: ["Blanco", "Negro"],
+  },
+  {
+    id: "vita",
+    name: "VITA",
+    price: 59900,
+    image: "assets/archivio-05-vita.png",
+    blackImage: "assets/archivio-05-vita-black.png",
+    frontImage: "assets/archivio-front-white.png",
+    blackFrontImage: "assets/archivio-front-black.png",
+    description: "La naturaleza florece y la creacion encuentra su primera respiracion.",
+    colors: ["Blanco", "Negro"],
+  },
+  {
+    id: "imago-dei",
+    name: "IMAGO DEI",
+    price: 59900,
+    image: "assets/archivio-06-imago-dei.png",
+    frontImage: "assets/archivio-front-white.png",
+    description: "El ser humano como sintesis de arte, conocimiento y creacion.",
+    colors: ["Blanco"],
+  },
+  {
+    id: "requies",
+    name: "REQUIES",
+    price: 59900,
+    image: "assets/archivio-07-requies.png",
+    frontImage: "assets/archivio-front-white.png",
+    description: "El silencio que contempla una obra completa y eterna.",
+    colors: ["Blanco"],
+  },
+];
+
+const sizes = ["S", "M", "L", "XL"];
+const cart = [];
+
+const productGrid = document.querySelector("[data-products]");
+const cartPanel = document.querySelector("[data-cart-panel]");
+const cartItems = document.querySelector("[data-cart-items]");
+const cartCount = document.querySelector("[data-cart-count]");
+const cartTotal = document.querySelector("[data-cart-total]");
+const whatsapp = document.querySelector("[data-whatsapp]");
+const overlay = document.querySelector("[data-overlay]");
+const header = document.querySelector("[data-header]");
+const themeToggle = document.querySelector("[data-theme-toggle]");
+
+const money = new Intl.NumberFormat("es-CO", {
+  style: "currency",
+  currency: "COP",
+  maximumFractionDigits: 0,
+});
+
+function setTheme(theme) {
+  const isDark = theme === "dark";
+  document.body.classList.toggle("theme-dark", isDark);
+  themeToggle.setAttribute("aria-label", isDark ? "Activar modo claro" : "Activar modo oscuro");
+  localStorage.setItem("spadaro-theme", theme);
+}
+
+function getProductImage(product, color, view) {
+  if (view === "front") {
+    return color === "Negro" && product.blackFrontImage ? product.blackFrontImage : product.frontImage;
+  }
+
+  return color === "Negro" && product.blackImage ? product.blackImage : product.image;
+}
+
+function getViewLabel(view) {
+  return view === "front" ? "Vista frontal" : "Vista trasera";
+}
+
+function updateProductVisual(productId) {
+  const product = products.find((item) => item.id === productId);
+  const image = document.querySelector(`[data-product-image="${productId}"]`);
+  const label = document.querySelector(`[data-view-label="${productId}"]`);
+  const color = document.querySelector(`[data-color="${productId}"]`).value;
+  const view = image.dataset.view || "back";
+
+  image.src = getProductImage(product, color, view);
+  label.textContent = getViewLabel(view);
+}
+
+function renderProducts() {
+  productGrid.innerHTML = products
+    .map(
+      (product) => `
+        <article class="product-card">
+          <div class="product-visual">
+            <img data-product-image="${product.id}" data-view="back" src="${product.image}" alt="Camisa ${product.name} de ARCHIVIO 01: CREAZIONE" loading="lazy" />
+            <span class="view-label" data-view-label="${product.id}">Vista trasera</span>
+            <div class="slide-controls" aria-label="Cambiar vista de ${product.name}">
+              <button class="slide-button" type="button" aria-label="Ver imagen anterior" data-slide="${product.id}" data-direction="-1">&lsaquo;</button>
+              <button class="slide-button" type="button" aria-label="Ver imagen siguiente" data-slide="${product.id}" data-direction="1">&rsaquo;</button>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-title-row">
+              <div>
+                <h3>${product.name}</h3>
+                <p>${product.description}</p>
+              </div>
+              <span class="price">${money.format(product.price)}</span>
+            </div>
+            <div class="product-options">
+              <label>
+                Color
+                <select data-color="${product.id}">
+                  ${product.colors.map((color) => `<option>${color}</option>`).join("")}
+                </select>
+              </label>
+              <label>
+                Talla
+                <select data-size="${product.id}">
+                  ${sizes.map((size) => `<option>${size}</option>`).join("")}
+                </select>
+              </label>
+            </div>
+            <button class="button primary" type="button" data-add="${product.id}">Agregar al carrito</button>
+          </div>
+        </article>
+      `,
+    )
+    .join("");
+}
+
+function renderCart() {
+  cartCount.textContent = cart.length;
+
+  if (!cart.length) {
+    cartItems.innerHTML = '<p class="empty-cart">Tu carrito esta listo para la primera camisa.</p>';
+  } else {
+    cartItems.innerHTML = cart
+      .map(
+        (item, index) => `
+          <div class="cart-item">
+            <div>
+              <strong>${item.name}</strong>
+              <span>${item.color} | Talla ${item.size}</span>
+              <span>${money.format(item.price)}</span>
+            </div>
+            <button class="remove-item" type="button" data-remove="${index}">Quitar</button>
+          </div>
+        `,
+      )
+      .join("");
+  }
+
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
+  cartTotal.textContent = money.format(total);
+
+  const orderText = cart.length
+    ? cart.map((item) => `${item.name} (${item.color}, talla ${item.size})`).join("%0A")
+    : "Hola SPADARO, quiero conocer la coleccion ARCHIVIO 01: CREAZIONE.";
+
+  whatsapp.href = `https://wa.me/573104906037?text=${encodeURIComponent(`Hola SPADARO, quiero hacer este pedido:\n${decodeURIComponent(orderText)}\nTotal estimado: ${money.format(total)}`)}`;
+}
+
+function openCart() {
+  document.body.classList.add("cart-open");
+  cartPanel.classList.add("open");
+  overlay.classList.add("open");
+  cartPanel.setAttribute("aria-hidden", "false");
+}
+
+function closeCart() {
+  document.body.classList.remove("cart-open");
+  cartPanel.classList.remove("open");
+  overlay.classList.remove("open");
+  cartPanel.setAttribute("aria-hidden", "true");
+}
+
+document.addEventListener("click", (event) => {
+  const addButton = event.target.closest("[data-add]");
+  const removeButton = event.target.closest("[data-remove]");
+  const slideButton = event.target.closest("[data-slide]");
+
+  if (slideButton) {
+    const image = document.querySelector(`[data-product-image="${slideButton.dataset.slide}"]`);
+    image.dataset.view = image.dataset.view === "front" ? "back" : "front";
+    updateProductVisual(slideButton.dataset.slide);
+  }
+
+  if (addButton) {
+    const product = products.find((item) => item.id === addButton.dataset.add);
+    const color = document.querySelector(`[data-color="${product.id}"]`).value;
+    const size = document.querySelector(`[data-size="${product.id}"]`).value;
+    cart.push({ ...product, color, size });
+    renderCart();
+    openCart();
+  }
+
+  if (removeButton) {
+    cart.splice(Number(removeButton.dataset.remove), 1);
+    renderCart();
+  }
+});
+
+document.addEventListener("change", (event) => {
+  const colorSelect = event.target.closest("[data-color]");
+
+  if (!colorSelect) {
+    return;
+  }
+
+  const product = products.find((item) => item.id === colorSelect.dataset.color);
+  updateProductVisual(product.id);
+});
+
+document.querySelectorAll("[data-cart-open]").forEach((button) => {
+  button.addEventListener("click", openCart);
+});
+
+document.querySelector("[data-cart-close]").addEventListener("click", closeCart);
+overlay.addEventListener("click", closeCart);
+themeToggle.addEventListener("click", () => {
+  setTheme(document.body.classList.contains("theme-dark") ? "light" : "dark");
+});
+
+window.addEventListener("scroll", () => {
+  header.classList.toggle("scrolled", window.scrollY > 16);
+});
+
+setTheme(localStorage.getItem("spadaro-theme") || "light");
+renderProducts();
+renderCart();
