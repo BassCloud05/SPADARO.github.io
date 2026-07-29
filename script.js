@@ -207,12 +207,29 @@ function openCart() {
 function animateProductToCart(button) {
 
     const productCard = button.closest(".product-card");
-    const image = productCard.querySelector(".product-visual img");
-    const cart = document.querySelector("[data-cart-open]");
+
+const image =
+    productCard.querySelector(".product-visual img");
+
+const cart =
+    document.querySelector("[data-cart-open]");
+
+const buttonRect =
+    button.getBoundingClientRect();
 
     if (!image || !cart) return;
 
-    const imageRect = image.getBoundingClientRect();
+    const imageRect = {
+
+    left: buttonRect.left,
+
+    top: buttonRect.top,
+
+    width: buttonRect.width,
+
+    height: buttonRect.height
+
+};
     const cartRect = cart.getBoundingClientRect();
 
     const clone = image.cloneNode(true);
@@ -234,43 +251,76 @@ clone.style.top =
 
     document.body.appendChild(clone);
 clone.style.transform = "scale(.95)";
-    requestAnimationFrame(() => {
+  const startX = imageRect.left + imageRect.width / 2;
+const startY = imageRect.top + imageRect.height / 2;
 
-        const x =
-            cartRect.left +
-            cartRect.width / 2 -
-            (imageRect.left + imageRect.width / 2);
+const endX = cartRect.left + cartRect.width / 2;
+const endY = cartRect.top + cartRect.height / 2;
 
-        const y =
-            cartRect.top +
-            cartRect.height / 2 -
-            (imageRect.top + imageRect.height / 2);
+// Punto de control para crear el arco
+const controlX = startX + (endX - startX) * 0.5;
+const controlY = Math.min(startY, endY) - 180;
 
-        clone.style.transform =
-            `translate(${x}px, ${y}px) scale(.12) rotate(-12deg)`;
+const duration = 700;
+const startTime = performance.now();
 
-        clone.style.opacity = "0";
-    });
+function easeOutCubic(t) {
+    return 1 - Math.pow(1 - t, 3);
+}
 
-    clone.addEventListener("transitionend", () => {
+function animate(now) {
 
-        clone.remove();
+    const elapsed = now - startTime;
+    const t = Math.min(elapsed / duration, 1);
+    const p = easeOutCubic(t);
 
-        cart.classList.remove("cart-bounce");
-cart.classList.remove("cart-flash");
+    const x =
+        (1 - p) * (1 - p) * startX +
+        2 * (1 - p) * p * controlX +
+        p * p * endX;
 
-void cart.offsetWidth;
+    const y =
+        (1 - p) * (1 - p) * startY +
+        2 * (1 - p) * p * controlY +
+        p * p * endY;
 
-cart.classList.add("cart-bounce");
-cart.classList.add("cart-flash");
+    clone.style.left = x + "px";
+    clone.style.top = y + "px";
+    const scale = 1 - (p * 0.88);
+const rotate = -18 * p;
 
-        const count = document.querySelector("[data-cart-count]");
+clone.style.transform =
+    `translate(-50%, -50%) scale(${scale}) rotate(${rotate}deg)`;
 
-        count.classList.remove("count-pop");
-        void count.offsetWidth;
-        count.classList.add("count-pop");
+clone.style.opacity = 1 - p;
 
-    }, { once: true });
+   if (t < 1) {
+
+    requestAnimationFrame(animate);
+
+} else {
+
+    clone.remove();
+
+    cart.classList.remove("cart-bounce");
+    cart.classList.remove("cart-flash");
+
+    void cart.offsetWidth;
+
+    cart.classList.add("cart-bounce");
+    cart.classList.add("cart-flash");
+
+    const count =
+        document.querySelector("[data-cart-count]");
+
+    count.classList.remove("count-pop");
+    void count.offsetWidth;
+    count.classList.add("count-pop");
+
+}
+}
+
+requestAnimationFrame(animate);
 
 }
 function closeCart() {
