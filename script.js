@@ -228,8 +228,7 @@ document.addEventListener("click", (event) => {
     const color = document.querySelector(`[data-color="${product.id}"]`).value;
     const size = document.querySelector(`[data-size="${product.id}"]`).value;
     cart.push({ ...product, color, size });
-    renderCart();
-    openCart();
+renderCart();
   }
 
   if (removeButton) {
@@ -266,9 +265,6 @@ window.addEventListener("scroll", () => {
 setTheme(localStorage.getItem("spadaro-theme") || "light");
 renderProducts();
 renderCart();
-const lightbox=document.querySelector("[data-lightbox]");
-const lightboxImage=document.querySelector("[data-lightbox-image]");
-const lightboxClose=document.querySelector("[data-lightbox-close]");
 document.querySelectorAll(".product-visual img").forEach((img) => {
 
     img.addEventListener("mousemove", (e) => {
@@ -287,19 +283,4 @@ document.querySelectorAll(".product-visual img").forEach((img) => {
         img.style.transformOrigin = "center center";
     });
 
-    img.addEventListener("click",()=>{
-      if(!lightbox||!lightboxImage)return;
-      lightboxImage.src=img.src;
-      lightbox.classList.add("open");
-    });
-
-});
-
-if(lightbox&&lightboxClose){
- lightboxClose.addEventListener("click",()=>lightbox.classList.remove("open"));
- lightbox.addEventListener("click",(e)=>{if(e.target===lightbox)lightbox.classList.remove("open");});
- document.addEventListener("keydown",(e)=>{if(e.key==="Escape")lightbox.classList.remove("open");});
-}
-window.addEventListener("load", () => {
-    document.body.classList.add("loaded");
 });

@@ -262,40 +262,14 @@ body.theme-dark .moon-icon {
 }
 
 .hero-shade {
-
   background:
-    linear-gradient(
-      90deg,
-      rgba(8,8,8,.82) 0%,
-      rgba(8,8,8,.72) 22%,
-      rgba(8,8,8,.45) 42%,
-      rgba(8,8,8,.18) 58%,
-      rgba(8,8,8,0) 75%
-    ),
-
-    linear-gradient(
-      180deg,
-      rgba(0,0,0,.25),
-      rgba(0,0,0,.05)
-    );
-
-  opacity: 1;
-  transition: opacity 2s ease;
+    linear-gradient(90deg, rgba(13, 12, 11, 0.76), rgba(13, 12, 11, 0.34) 50%, rgba(13, 12, 11, 0.05)),
+    linear-gradient(0deg, rgba(13, 12, 11, 0.62), rgba(13, 12, 11, 0.1) 58%);
 }
 
 .hero-content {
-
-    position: relative;
-
-    width: min(620px,100%);
-
-    opacity: 0;
-
-    transform: translateY(40px);
-
-    transition:
-        opacity 1.2s ease,
-        transform 1.2s ease;
+  position: relative;
+  width: min(620px, 100%);
 }
 
 .eyebrow {
@@ -336,12 +310,6 @@ h2 {
   margin: 0 0 28px;
   object-fit: contain;
   object-position: left center;
-
-  opacity: 0;
-  transform: translateY(25px);
-  transition:
-      opacity 1s ease,
-      transform 1s ease;
 }
 
 .hero-kicker {
@@ -897,24 +865,4 @@ body.theme-dark .site-footer {
         transform-origin .1s linear;
     cursor: zoom-in;
     will-change: transform;
-}
-
-.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:.25s;z-index:9999}
-.lightbox.open{opacity:1;visibility:visible}
-.lightbox-content img{max-width:90vw;max-height:90vh}
-.lightbox-close{position:absolute;top:20px;right:25px;background:none;border:none;color:#fff;font-size:42px;cursor:pointer}
-body.loaded .hero-content {
-
-    opacity: 1;
-
-    transform: translateY(0);
-
-}
-
-body.loaded .hero-logo {
-
-    opacity: 1;
-
-    transform: translateY(0);
-
 }
