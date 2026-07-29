@@ -52,7 +52,7 @@ const products = [
     frontImage: "assets/archivio-front-white.png",
     blackFrontImage: "assets/archivio-front-black.png",
     description: "La naturaleza florece y la creacion encuentra su primera respiracion.",
-    colors: ["Blanco", "Negro"],
+    colors: ["Blanco"],
   },
   {
     id: "imago-dei",
