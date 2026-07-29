@@ -854,3 +854,20 @@ body.theme-dark .site-footer {
     font-size: 0.88rem;
   }
 }
+.product-visual {
+    overflow: hidden;
+    position: relative;
+}
+
+.product-visual img {
+    transition:
+        transform .25s ease,
+        transform-origin .1s linear;
+    cursor: zoom-in;
+    will-change: transform;
+}
+
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:.25s;z-index:9999}
+.lightbox.open{opacity:1;visibility:visible}
+.lightbox-content img{max-width:90vw;max-height:90vh}
+.lightbox-close{position:absolute;top:20px;right:25px;background:none;border:none;color:#fff;font-size:42px;cursor:pointer}
