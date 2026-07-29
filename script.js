@@ -300,3 +300,6 @@ if(lightbox&&lightboxClose){
  lightbox.addEventListener("click",(e)=>{if(e.target===lightbox)lightbox.classList.remove("open");});
  document.addEventListener("keydown",(e)=>{if(e.key==="Escape")lightbox.classList.remove("open");});
 }
+window.addEventListener("load", () => {
+    document.body.classList.add("loaded");
+});
