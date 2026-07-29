@@ -204,7 +204,75 @@ function openCart() {
   overlay.classList.add("open");
   cartPanel.setAttribute("aria-hidden", "false");
 }
+function animateProductToCart(button) {
 
+    const productCard = button.closest(".product-card");
+    const image = productCard.querySelector(".product-visual img");
+    const cart = document.querySelector("[data-cart-open]");
+
+    if (!image || !cart) return;
+
+    const imageRect = image.getBoundingClientRect();
+    const cartRect = cart.getBoundingClientRect();
+
+    const clone = image.cloneNode(true);
+
+    clone.classList.add("flying-product");
+
+    clone.style.left = imageRect.left + "px";
+    clone.style.top = imageRect.top + "px";
+   const startSize = Math.min(imageRect.width * 0.45, 180);
+
+clone.style.width = startSize + "px";
+clone.style.height = startSize + "px";
+
+clone.style.left =
+    imageRect.left + imageRect.width / 2 - startSize / 2 + "px";
+
+clone.style.top =
+    imageRect.top + imageRect.height / 2 - startSize / 2 + "px";
+
+    document.body.appendChild(clone);
+clone.style.transform = "scale(.95)";
+    requestAnimationFrame(() => {
+
+        const x =
+            cartRect.left +
+            cartRect.width / 2 -
+            (imageRect.left + imageRect.width / 2);
+
+        const y =
+            cartRect.top +
+            cartRect.height / 2 -
+            (imageRect.top + imageRect.height / 2);
+
+        clone.style.transform =
+            `translate(${x}px, ${y}px) scale(.12) rotate(-12deg)`;
+
+        clone.style.opacity = "0";
+    });
+
+    clone.addEventListener("transitionend", () => {
+
+        clone.remove();
+
+        cart.classList.remove("cart-bounce");
+cart.classList.remove("cart-flash");
+
+void cart.offsetWidth;
+
+cart.classList.add("cart-bounce");
+cart.classList.add("cart-flash");
+
+        const count = document.querySelector("[data-cart-count]");
+
+        count.classList.remove("count-pop");
+        void count.offsetWidth;
+        count.classList.add("count-pop");
+
+    }, { once: true });
+
+}
 function closeCart() {
   document.body.classList.remove("cart-open");
   cartPanel.classList.remove("open");
@@ -227,9 +295,12 @@ document.addEventListener("click", (event) => {
     const product = products.find((item) => item.id === addButton.dataset.add);
     const color = document.querySelector(`[data-color="${product.id}"]`).value;
     const size = document.querySelector(`[data-size="${product.id}"]`).value;
+
     cart.push({ ...product, color, size });
-renderCart();
-  }
+    renderCart();
+
+    animateProductToCart(addButton);
+}
 
   if (removeButton) {
     cart.splice(Number(removeButton.dataset.remove), 1);

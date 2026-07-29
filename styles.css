@@ -866,3 +866,115 @@ body.theme-dark .site-footer {
     cursor: zoom-in;
     will-change: transform;
 }
+/*==========================
+  FLY TO CART
+==========================*/
+
+.flying-product{
+
+    position:fixed;
+
+    z-index:9999;
+
+    pointer-events:none;
+
+    border-radius:10px;
+
+    box-shadow:0 18px 40px rgba(0,0,0,.22);
+
+    transition:
+        transform .75s cubic-bezier(.22,1,.36,1),
+        opacity .75s;
+
+    will-change:transform,opacity;
+
+}
+
+
+/*==========================
+  REBOTE DEL CARRITO
+==========================*/
+
+.cart-bounce{
+
+    animation:cartBounce .45s ease;
+
+}
+
+@keyframes cartBounce{
+
+    0%{
+        transform:scale(1);
+    }
+
+    35%{
+        transform:scale(1.18);
+    }
+
+    60%{
+        transform:scale(.93);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+
+}
+
+
+/*==========================
+  CONTADOR
+==========================*/
+
+.count-pop{
+
+    animation:countPop .35s ease;
+
+}
+
+@keyframes countPop{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.35);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+
+}
+.cart-flash{
+
+    animation:
+        cartFlash .55s ease;
+
+}
+
+@keyframes cartFlash{
+
+    0%{
+
+        box-shadow:
+            0 0 0 rgba(122,38,52,0);
+
+    }
+
+    35%{
+
+        box-shadow:
+            0 0 0 12px rgba(122,38,52,.20);
+
+    }
+
+    100%{
+
+        box-shadow:
+            0 0 0 rgba(122,38,52,0);
+
+    }
+
+}
