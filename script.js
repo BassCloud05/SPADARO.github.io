@@ -143,9 +143,11 @@ function renderProducts() {
           <div class="product-visual">
             <img data-product-image="${product.id}" data-view="back" src="${initialImage}" alt="Camisa ${product.name} de ARCHIVIO 01: CREAZIONE" loading="lazy" />
             <span class="view-label" data-view-label="${product.id}">Vista trasera</span>
-            <span class="color-label">
-    BLANCO • NEGRO
-</span>
+           ${product.dualColor ? `
+    <span class="color-label">
+        BLANCO • NEGRO
+    </span>
+` : ""}
             <div class="slide-controls" aria-label="Cambiar vista de ${product.name}">
               <button class="slide-button" type="button" aria-label="Ver imagen anterior" data-slide="${product.id}" data-direction="-1">&lsaquo;</button>
               <button class="slide-button" type="button" aria-label="Ver imagen siguiente" data-slide="${product.id}" data-direction="1">&rsaquo;</button>
