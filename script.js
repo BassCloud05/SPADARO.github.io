@@ -486,9 +486,11 @@ gyroButton.addEventListener("click", async () => {
                 localStorage.setItem("spadaro-gyro", "true");
 
                 gyroIntro.classList.remove("show");
+                alert("Quité la clase SHOW");
                 alert(lightbox.classList.contains("open"));
+                alert(lightboxImage.src);
 
-alert(lightboxImage.src);
+
 
             }
 
