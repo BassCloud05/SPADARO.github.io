@@ -464,17 +464,68 @@ document.addEventListener("click", (event) => {
     lightboxImage.alt = image.alt;
 
     lightbox.classList.add("open");
+    alert(lightbox.className);
+
+openLightbox();
+gyroButton.addEventListener("click", async () => {
+
+    alert("Botón pulsado");
+
+    try {
+
+        alert(typeof DeviceOrientationEvent);
+
+        alert(typeof DeviceOrientationEvent.requestPermission);
+
+        if (
+            typeof DeviceOrientationEvent !== "undefined" &&
+            typeof DeviceOrientationEvent.requestPermission === "function"
+        ) {
+
+            alert("Voy a pedir permiso");
+
+            const permission =
+                await DeviceOrientationEvent.requestPermission();
+
+            alert(permission);
+
+            if (permission === "granted") {
+
+                enableGyroscope();
+
+            }
+
+        } else {
+
+            alert("No existe requestPermission");
+
+            enableGyroscope();
+
+        }
+
+    } catch (error) {
+
+        alert(error);
+
+    }
+
+});
 
 });
 
 lightboxClose.addEventListener("click", () => {
+
     lightbox.classList.remove("open");
+
+    disableGyroscope();
+
 });
 
 lightbox.addEventListener("click", (event) => {
 
     if (event.target === lightbox) {
         lightbox.classList.remove("open");
+        disableGyroscope();
     }
 
 });
@@ -482,7 +533,10 @@ lightbox.addEventListener("click", (event) => {
 document.addEventListener("keydown", (event) => {
 
     if (event.key === "Escape") {
+
         lightbox.classList.remove("open");
+        disableGyroscope();
+
     }
 
 });
@@ -536,3 +590,65 @@ lightboxContent.addEventListener("mouseleave", () => {
 });
 
 animateTilt();
+// ===== GYROSCOPE =====
+
+let gyroEnabled = false;
+
+function enableGyroscope() {
+
+    if (gyroEnabled) return;
+
+    gyroEnabled = true;
+
+    window.addEventListener("deviceorientation", handleOrientation);
+
+}
+
+function disableGyroscope() {
+
+    if (!gyroEnabled) return;
+
+    gyroEnabled = false;
+
+    window.removeEventListener("deviceorientation", handleOrientation);
+
+}
+
+function handleOrientation(event) {
+
+    if (event.beta == null || event.gamma == null) return;
+
+    mouseX = event.gamma / 4;
+    mouseY = -(event.beta - 45) / 8;
+
+}
+const gyroIntro = document.querySelector("[data-gyro-intro]");
+const gyroButton = document.querySelector("[data-enable-gyro]");
+alert(gyroIntro ? "gyroIntro OK" : "gyroIntro NULL");
+alert(gyroButton ? "gyroButton OK" : "gyroButton NULL");
+
+const isiPhone =
+    /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+function openLightbox() {
+
+    // Solo para esta prueba
+    localStorage.removeItem("spadaro-gyro");
+
+    alert("Es iPhone: " + isiPhone);
+
+    alert("Guardado: " + localStorage.getItem("spadaro-gyro"));
+
+    if (
+        isiPhone &&
+        !localStorage.getItem("spadaro-gyro")
+    ) {
+
+        gyroIntro.classList.add("show");
+        return;
+
+    }
+
+    enableGyroscope();
+
+}
