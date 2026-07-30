@@ -558,19 +558,19 @@ let targetY = 0;
 
 function animateTilt() {
 
-   targetX += (mouseX - targetX) * 0.12;
-targetY += (mouseY - targetY) * 0.12;
+   targetX += (mouseX - targetX) * 0.9;
+targetY += (mouseY - targetY) * 0.9;
 
-   const moveX = targetX * 16;
-const moveY = targetY * 16;
+   const moveX = targetX * 12;
+const moveY = targetY * 12;
 
 lightboxImg.style.transform = `
 translateX(${moveX}px)
 translateY(${moveY}px)
 scale(1.03)
 perspective(1000px)
-rotateX(${targetY * 3}deg)
-rotateY(${targetX * 3}deg)
+rotateX(${targetY * 2.2}deg)
+rotateY(${targetX * 2.2}deg)
 `;
 
     requestAnimationFrame(animateTilt);
@@ -587,8 +587,8 @@ lightboxContent.addEventListener("mousemove", (e) => {
     const x = (e.clientX - rect.left) / rect.width;
     const y = (e.clientY - rect.top) / rect.height;
 
-    mouseX = (x - 0.5) * 28;
-mouseY = -(y - 0.5) * 28;
+    mouseX = (x - 0.5) * 18;
+mouseY = -(y - 0.5) * 18;
 
 });
 
@@ -628,8 +628,8 @@ function handleOrientation(event) {
 
     if (event.beta == null || event.gamma == null) return;
 
-    mouseX = event.gamma / 1.4;
-    mouseY = -(event.beta - 45) / 2.2;
+    mouseX = event.gamma / 2;
+    mouseY = -(event.beta - 45) / 3;
 
 }
 
