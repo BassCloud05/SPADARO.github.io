@@ -486,3 +486,53 @@ document.addEventListener("keydown", (event) => {
     }
 
 });
+const lightboxContent = document.querySelector(".lightbox-content");
+const lightboxImg = document.querySelector(".lightbox-content img");
+
+let targetX = 0;
+let targetY = 0;
+
+function animateTilt() {
+
+   targetX += (mouseX - targetX) * 0.12;
+targetY += (mouseY - targetY) * 0.12;
+
+   const moveX = targetX * 2;
+const moveY = targetY * 2;
+
+lightboxImg.style.transform = `
+translateX(${moveX}px)
+translateY(${moveY}px)
+scale(1)
+perspective(1400px)
+rotateX(${targetY}deg)
+rotateY(${targetX}deg)
+`;
+
+    requestAnimationFrame(animateTilt);
+
+}
+
+let mouseX = 0;
+let mouseY = 0;
+
+lightboxContent.addEventListener("mousemove", (e) => {
+
+    const rect = lightboxContent.getBoundingClientRect();
+
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+
+    mouseX = (x - 0.5) * 10;
+mouseY = -(y - 0.5) * 10;
+
+});
+
+lightboxContent.addEventListener("mouseleave", () => {
+
+    mouseX = 0;
+    mouseY = 0;
+
+});
+
+animateTilt();

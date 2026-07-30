@@ -1113,6 +1113,9 @@ body.theme-dark .site-footer {
 
     max-width:90vw;
     max-height:90vh;
+
+    perspective:1400px;
+    transform-style:preserve-3d;
 }
 
 .lightbox-content img{
@@ -1125,7 +1128,10 @@ body.theme-dark .site-footer {
     transform:
         translateY(20px)
         scale(.92);
-
+transform-style: preserve-3d;
+will-change: transform;
+backface-visibility: hidden;
+cursor: grab;
     opacity:0;
 
     transition:
@@ -1140,6 +1146,9 @@ body.theme-dark .site-footer {
         scale(1);
 
     opacity:1;
+
+    animation:
+        artworkFloat .9s cubic-bezier(.22,1,.36,1);
 }
 
 .lightbox-close{
@@ -1170,5 +1179,44 @@ body.theme-dark .site-footer {
 .lightbox-close:hover{
 
     transform:scale(1.12);
+
+}
+@keyframes artworkFloat{
+
+    0%{
+
+        transform:
+            translateY(24px)
+            scale(.92)
+            rotateX(-4deg);
+
+    }
+
+    35%{
+
+        transform:
+            translateY(-6px)
+            scale(1.02)
+            rotateX(2deg);
+
+    }
+
+    60%{
+
+        transform:
+            translateY(3px)
+            scale(.995)
+            rotateX(-1deg);
+
+    }
+
+    100%{
+
+        transform:
+            translateY(0)
+            scale(1)
+            rotateX(0deg);
+
+    }
 
 }
