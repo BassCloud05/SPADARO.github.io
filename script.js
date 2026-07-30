@@ -561,16 +561,16 @@ function animateTilt() {
    targetX += (mouseX - targetX) * 0.12;
 targetY += (mouseY - targetY) * 0.12;
 
-   const moveX = targetX * 2;
-const moveY = targetY * 2;
+   const moveX = targetX * 16;
+const moveY = targetY * 16;
 
 lightboxImg.style.transform = `
 translateX(${moveX}px)
 translateY(${moveY}px)
-scale(1)
-perspective(1400px)
-rotateX(${targetY}deg)
-rotateY(${targetX}deg)
+scale(1.03)
+perspective(1000px)
+rotateX(${targetY * 3}deg)
+rotateY(${targetX * 3}deg)
 `;
 
     requestAnimationFrame(animateTilt);
@@ -587,8 +587,8 @@ lightboxContent.addEventListener("mousemove", (e) => {
     const x = (e.clientX - rect.left) / rect.width;
     const y = (e.clientY - rect.top) / rect.height;
 
-    mouseX = (x - 0.5) * 10;
-mouseY = -(y - 0.5) * 10;
+    mouseX = (x - 0.5) * 28;
+mouseY = -(y - 0.5) * 28;
 
 });
 
@@ -628,10 +628,12 @@ function handleOrientation(event) {
 
     if (event.beta == null || event.gamma == null) return;
 
-    mouseX = event.gamma / 4;
-    mouseY = -(event.beta - 45) / 8;
+    mouseX = event.gamma / 1.4;
+    mouseY = -(event.beta - 45) / 2.2;
 
 }
+
+
 const gyroIntro = document.querySelector("[data-gyro-intro]");
 const gyroButton = document.querySelector("[data-enable-gyro]");
 
