@@ -450,3 +450,39 @@ document.querySelectorAll(".product-visual img").forEach((img) => {
     });
 
 });
+const lightbox = document.querySelector("[data-lightbox]");
+const lightboxImage = document.querySelector("[data-lightbox-image]");
+const lightboxClose = document.querySelector("[data-lightbox-close]");
+
+document.addEventListener("click", (event) => {
+
+    const image = event.target.closest("[data-product-image]");
+
+    if (!image) return;
+
+    lightboxImage.src = image.src;
+    lightboxImage.alt = image.alt;
+
+    lightbox.classList.add("open");
+
+});
+
+lightboxClose.addEventListener("click", () => {
+    lightbox.classList.remove("open");
+});
+
+lightbox.addEventListener("click", (event) => {
+
+    if (event.target === lightbox) {
+        lightbox.classList.remove("open");
+    }
+
+});
+
+document.addEventListener("keydown", (event) => {
+
+    if (event.key === "Escape") {
+        lightbox.classList.remove("open");
+    }
+
+});
