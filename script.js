@@ -9,6 +9,7 @@ const products = [
     blackFrontImage: "assets/archivio-front-black.png",
     description: "El primer destello que rompio la oscuridad e inicio toda la creacion.",
     colors: ["Blanco", "Negro"],
+    dualColor: true,
   },
   {
     id: "firmamentum",
@@ -20,6 +21,7 @@ const products = [
     blackFrontImage: "assets/archivio-front-black.png",
     description: "La inmensidad del cielo donde el universo comenzo a tomar forma.",
     colors: ["Blanco", "Negro"],
+    dualColor: true,
   },
   {
     id: "principium",
@@ -31,6 +33,7 @@ const products = [
     blackFrontImage: "assets/archivio-front-black.png",
     description: "El instante en que el caos encontro orden, equilibrio y proposito.",
     colors: ["Blanco", "Negro"],
+    dualColor: true,
   },
   {
     id: "astra",
@@ -42,6 +45,7 @@ const products = [
     blackFrontImage: "assets/archivio-front-black.png",
     description: "Los astros que marcaron el tiempo y guiaron la historia de la humanidad.",
     colors: ["Blanco", "Negro"],
+    dualColor: true,
   },
   {
     id: "vita",
@@ -126,11 +130,22 @@ function updateProductVisual(productId) {
 function renderProducts() {
   productGrid.innerHTML = products
     .map(
-      (product) => `
+      (product) => {
+
+    const initialImage =
+        product.id === "firmamentum" ||
+        product.id === "principium"
+            ? product.blackImage
+            : product.image;
+
+    return `
         <article class="product-card">
           <div class="product-visual">
-            <img data-product-image="${product.id}" data-view="back" src="${product.image}" alt="Camisa ${product.name} de ARCHIVIO 01: CREAZIONE" loading="lazy" />
+            <img data-product-image="${product.id}" data-view="back" src="${initialImage}" alt="Camisa ${product.name} de ARCHIVIO 01: CREAZIONE" loading="lazy" />
             <span class="view-label" data-view-label="${product.id}">Vista trasera</span>
+            <span class="color-label">
+    Disponible en blanco y en negro
+</span>
             <div class="slide-controls" aria-label="Cambiar vista de ${product.name}">
               <button class="slide-button" type="button" aria-label="Ver imagen anterior" data-slide="${product.id}" data-direction="-1">&lsaquo;</button>
               <button class="slide-button" type="button" aria-label="Ver imagen siguiente" data-slide="${product.id}" data-direction="1">&rsaquo;</button>
@@ -151,8 +166,23 @@ function renderProducts() {
               <label>
                 Color
                 <select data-color="${product.id}">
-                  ${product.colors.map((color) => `<option>${color}</option>`).join("")}
-                </select>
+    ${product.colors.map((color) => `
+        <option
+            ${(
+                (product.id === "firmamentum" || product.id === "principium") &&
+                color === "Negro"
+            ) || (
+                product.id !== "firmamentum" &&
+                product.id !== "principium" &&
+                color === "Blanco"
+            )
+                ? "selected"
+                : ""}
+        >
+            ${color}
+        </option>
+    `).join("")}
+</select>
               </label>
               <label>
                 Talla
@@ -164,8 +194,8 @@ function renderProducts() {
             <button class="button primary" type="button" data-add="${product.id}">Agregar al carrito</button>
           </div>
         </article>
-      `,
-    )
+            `;
+      })
     .join("");
 }
 
