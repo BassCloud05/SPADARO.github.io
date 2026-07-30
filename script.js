@@ -469,43 +469,44 @@ document.addEventListener("click", (event) => {
 openLightbox();
 gyroButton.addEventListener("click", async () => {
 
-    alert("Botón pulsado");
-
     try {
-
-        alert(typeof DeviceOrientationEvent);
-
-        alert(typeof DeviceOrientationEvent.requestPermission);
 
         if (
             typeof DeviceOrientationEvent !== "undefined" &&
             typeof DeviceOrientationEvent.requestPermission === "function"
         ) {
 
-            alert("Voy a pedir permiso");
-
             const permission =
                 await DeviceOrientationEvent.requestPermission();
-
-            alert(permission);
 
             if (permission === "granted") {
 
                 enableGyroscope();
 
+                localStorage.setItem("spadaro-gyro", "true");
+
+                gyroIntro.classList.remove("show");
+                alert(lightbox.classList.contains("open"));
+
+alert(lightboxImage.src);
+
             }
 
         } else {
 
-            alert("No existe requestPermission");
-
             enableGyroscope();
+
+            localStorage.setItem("spadaro-gyro", "true");
+
+            gyroIntro.classList.remove("show");
 
         }
 
     } catch (error) {
 
-        alert(error);
+        console.error(error);
+
+        gyroIntro.classList.remove("show");
 
     }
 
