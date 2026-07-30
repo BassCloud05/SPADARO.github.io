@@ -579,6 +579,8 @@ rotateY(${targetX * 2.2}deg)
 
 let mouseX = 0;
 let mouseY = 0;
+let startBeta = null;
+let startGamma = null;
 
 lightboxContent.addEventListener("mousemove", (e) => {
 
@@ -628,8 +630,16 @@ function handleOrientation(event) {
 
     if (event.beta == null || event.gamma == null) return;
 
-    mouseX = event.gamma / 3;
-    mouseY = -(event.beta - 45) / 4.2;
+    // Calibración automática en la primera lectura
+    if (startBeta === null || startGamma === null) {
+        startBeta = event.beta;
+        startGamma = event.gamma;
+    }
+
+    mouseX = (event.gamma - startGamma) / 3;
+    mouseY = -(event.beta - startBeta) / 4.2;
+    if (Math.abs(mouseX) < 0.4) mouseX = 0;
+if (Math.abs(mouseY) < 0.4) mouseY = 0;
 
 }
 
@@ -641,6 +651,8 @@ const isiPhone =
     /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
 function openLightbox() {
+  startBeta = null;
+startGamma = null;
 
     // Solo para esta prueba
     localStorage.removeItem("spadaro-gyro");
