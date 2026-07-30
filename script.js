@@ -464,7 +464,7 @@ document.addEventListener("click", (event) => {
     lightboxImage.alt = image.alt;
 
     lightbox.classList.add("open");
-    alert(lightbox.className);
+  
 
 openLightbox();
 gyroButton.addEventListener("click", async () => {
@@ -472,26 +472,26 @@ gyroButton.addEventListener("click", async () => {
     try {
 
         if (
-            typeof DeviceOrientationEvent !== "undefined" &&
-            typeof DeviceOrientationEvent.requestPermission === "function"
+            typeof window.DeviceOrientationEvent !== "undefined" &&
+            typeof window.DeviceOrientationEvent.requestPermission === "function"
         ) {
 
             const permission =
-                await DeviceOrientationEvent.requestPermission();
+                await window.DeviceOrientationEvent.requestPermission();
 
             if (permission === "granted") {
 
-    enableGyroscope();
+                enableGyroscope();
 
-    localStorage.setItem("spadaro-gyro", "true");
+                localStorage.setItem("spadaro-gyro", "true");
 
-    setTimeout(() => {
+                setTimeout(() => {
 
-        gyroIntro.classList.remove("show");
+                    gyroIntro.classList.remove("show");
 
-    }, 150);
+                }, 250);
 
-}
+            }
 
         } else {
 
@@ -503,7 +503,7 @@ setTimeout(() => {
 
     gyroIntro.classList.remove("show");
 
-}, 150);
+}, 250);
 
         }
 
@@ -511,11 +511,11 @@ setTimeout(() => {
 
         console.error(error);
 
-        setTimeout(() => {
+setTimeout(() => {
 
     gyroIntro.classList.remove("show");
 
-}, 150);
+}, 250);
 
     }
 
@@ -634,8 +634,6 @@ function handleOrientation(event) {
 }
 const gyroIntro = document.querySelector("[data-gyro-intro]");
 const gyroButton = document.querySelector("[data-enable-gyro]");
-alert(gyroIntro ? "gyroIntro OK" : "gyroIntro NULL");
-alert(gyroButton ? "gyroButton OK" : "gyroButton NULL");
 
 const isiPhone =
     /iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -645,9 +643,9 @@ function openLightbox() {
     // Solo para esta prueba
     localStorage.removeItem("spadaro-gyro");
 
-    alert("Es iPhone: " + isiPhone);
 
-    alert("Guardado: " + localStorage.getItem("spadaro-gyro"));
+
+    
 
     if (
         isiPhone &&
