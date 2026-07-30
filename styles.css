@@ -978,3 +978,30 @@ body.theme-dark .site-footer {
     }
 
 }
+.product-status{
+
+    min-height:18px;
+
+    margin-top:4px;
+
+    font-size:.82rem;
+
+    font-weight:600;
+
+    color:#2E7D32;
+
+    opacity:0;
+
+    transform:translateY(-4px);
+
+    transition:all .25s ease;
+
+}
+
+.product-status.active{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}

@@ -140,7 +140,10 @@ function renderProducts() {
             <div class="product-title-row">
               <div>
                 <h3>${product.name}</h3>
-                <p>${product.description}</p>
+
+<div class="product-status" data-status="${product.id}"></div>
+
+<p>${product.description}</p>
               </div>
               <span class="price">${money.format(product.price)}</span>
             </div>
@@ -330,7 +333,44 @@ function closeCart() {
   cartPanel.setAttribute("aria-hidden", "true");
 }
 
+function updateProductStatus() {
+
+  console.log("updateProductStatus ejecutándose");
+
+    document.querySelectorAll(".product-status").forEach(status => {
+
+        console.log(status);
+console.log(status.dataset);
+
+const productId = status.dataset.status;
+
+        console.log("productId:", productId);
+console.log("cart:", cart);
+
+const quantity = cart.filter(item => item.id === productId).length;
+
+console.log("quantity:", quantity);
+
+        if (quantity > 0) {
+
+            status.textContent = `✓ En carrito · ${quantity}`;
+
+            status.classList.add("active");
+
+        } else {
+
+            status.textContent = "";
+
+            status.classList.remove("active");
+
+        }
+
+    });
+
+}
+
 document.addEventListener("click", (event) => {
+
   const addButton = event.target.closest("[data-add]");
   const removeButton = event.target.closest("[data-remove]");
   const slideButton = event.target.closest("[data-slide]");
@@ -347,14 +387,18 @@ document.addEventListener("click", (event) => {
     const size = document.querySelector(`[data-size="${product.id}"]`).value;
 
     cart.push({ ...product, color, size });
-    renderCart();
+console.log(cart);
+renderCart();
+updateProductStatus();
 
-    animateProductToCart(addButton);
+animateProductToCart(addButton);
 }
 
   if (removeButton) {
     cart.splice(Number(removeButton.dataset.remove), 1);
-    renderCart();
+
+renderCart();
+updateProductStatus();
   }
 });
 
@@ -386,6 +430,7 @@ window.addEventListener("scroll", () => {
 setTheme(localStorage.getItem("spadaro-theme") || "light");
 renderProducts();
 renderCart();
+updateProductStatus();
 document.querySelectorAll(".product-visual img").forEach((img) => {
 
     img.addEventListener("mousemove", (e) => {
