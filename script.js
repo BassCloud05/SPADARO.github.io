@@ -628,8 +628,8 @@ function handleOrientation(event) {
 
     if (event.beta == null || event.gamma == null) return;
 
-    mouseX = event.gamma / 2;
-    mouseY = -(event.beta - 45) / 3;
+    mouseX = event.gamma / 3;
+    mouseY = -(event.beta - 45) / 4.2;
 
 }
 
