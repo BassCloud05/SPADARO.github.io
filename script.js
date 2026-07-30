@@ -481,26 +481,29 @@ gyroButton.addEventListener("click", async () => {
 
             if (permission === "granted") {
 
-                enableGyroscope();
+    enableGyroscope();
 
-                localStorage.setItem("spadaro-gyro", "true");
+    localStorage.setItem("spadaro-gyro", "true");
 
-                gyroIntro.classList.remove("show");
-                alert("Quité la clase SHOW");
-                alert(lightbox.classList.contains("open"));
-                alert(lightboxImage.src);
+    setTimeout(() => {
 
+        gyroIntro.classList.remove("show");
 
+    }, 150);
 
-            }
+}
 
         } else {
 
             enableGyroscope();
 
-            localStorage.setItem("spadaro-gyro", "true");
+localStorage.setItem("spadaro-gyro", "true");
 
-            gyroIntro.classList.remove("show");
+setTimeout(() => {
+
+    gyroIntro.classList.remove("show");
+
+}, 150);
 
         }
 
@@ -508,7 +511,11 @@ gyroButton.addEventListener("click", async () => {
 
         console.error(error);
 
-        gyroIntro.classList.remove("show");
+        setTimeout(() => {
+
+    gyroIntro.classList.remove("show");
+
+}, 150);
 
     }
 
