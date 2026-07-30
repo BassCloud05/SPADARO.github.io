@@ -457,7 +457,7 @@ window.addEventListener("scroll", () => {
   header.classList.toggle("scrolled", window.scrollY > 16);
 });
 
-setTheme(localStorage.getItem("spadaro-theme") || "light");
+setTheme(localStorage.getItem("spadaro-theme") || "dark");
 renderProducts();
 renderCart();
 updateProductStatus();
