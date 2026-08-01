@@ -15,39 +15,130 @@
         <header class="customizer-header">
 
             <span class="customizer-eyebrow">
-
                 SPADARO · PERSONALIZADO
-
             </span>
 
             <h2>
-
                 Personaliza tu prenda
-
             </h2>
 
             <p>
-
                 Diseña una pieza exclusiva.
                 Visualiza tu idea antes de realizar tu pedido.
-
             </p>
 
         </header>
 
-
         <div class="customizer-content">
+
+            <!-- PREVISUALIZACIÓN -->
 
             <div class="preview-panel">
 
-                AQUÍ IRÁ LA CAMISETA
+                <div class="shirt-preview">
+
+                    <img
+                        id="shirtMockup"
+                        src="assets/MOCKUP SUETER BLANCO FRONTAL.png"
+                        alt="Vista previa de la camiseta">
+
+                    <img
+                        id="designLayer"
+                        src=""
+                        alt="Diseño personalizado">
+
+                </div>
 
             </div>
 
+            <!-- PANEL -->
 
             <aside class="tools-panel">
 
-                AQUÍ IRÁN LOS CONTROLES
+                <div class="panel-card">
+
+                    <div class="panel-section">
+
+                        <h3>Color</h3>
+
+                        <div class="option-list">
+
+                            <button class="option active" id="whiteBtn">
+
+                                <span class="color-dot white"></span>
+
+                                Blanco
+
+                            </button>
+
+                            <button class="option" id="blackBtn">
+
+                                <span class="color-dot black"></span>
+
+                                Negro
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="panel-section">
+
+                        <h3>Vista</h3>
+
+                        <div class="option-list">
+
+                            <button class="option active" id="frontBtn">
+
+                                Frontal
+
+                            </button>
+
+                            <button class="option" id="backBtn">
+
+                                Trasera
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="panel-section">
+
+                        <h3>Diseño</h3>
+
+                        <label class="upload-box">
+
+                            <input
+                                type="file"
+                                id="designUpload"
+                                accept="image/png,image/jpeg,image/webp">
+
+                            <span>Subir diseño</span>
+
+                            <small>PNG · JPG · WEBP</small>
+
+                        </label>
+
+                    </div>
+
+                    <div class="notice">
+
+                        Recuerda tomar una captura de tu diseño antes de continuar.
+
+                    </div>
+
+                    <button
+                        class="continue-btn"
+                        id="continueCustom">
+
+                        Continuar por WhatsApp
+
+                    </button>
+
+                </div>
 
             </aside>
 

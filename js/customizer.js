@@ -1,5 +1,5 @@
 /* ==========================================
-   SPADARO CUSTOMIZER v0.1
+   SPADARO CUSTOMIZER v0.2
 ========================================== */
 
 async function initCustomizer() {
@@ -15,14 +15,100 @@ async function initCustomizer() {
 
     container.innerHTML = html;
 
+    /* ===========================
+       ELEMENTOS
+    =========================== */
+
     const customizer =
         document.getElementById("customizer");
+
+    const shirtMockup =
+        document.getElementById("shirtMockup");
 
     const openButton =
         document.getElementById("openCustomizer");
 
     const closeButton =
         document.getElementById("closeCustomizer");
+
+    const whiteBtn =
+        document.getElementById("whiteBtn");
+
+    const blackBtn =
+        document.getElementById("blackBtn");
+
+    const frontBtn =
+        document.getElementById("frontBtn");
+
+    const backBtn =
+        document.getElementById("backBtn");
+
+    /* ===========================
+       ESTADO DEL EDITOR
+    =========================== */
+
+    const editorState = {
+
+        color: "white",
+
+        view: "front"
+
+    };
+
+    /* ===========================
+       MOCKUPS
+    =========================== */
+
+    const mockups = {
+
+        white: {
+
+            front: "assets/MOCKUP SUETER BLANCO FRONTAL.png",
+
+            back: "assets/MOCKUP SUETER BLANCO TRASERO.png"
+
+        },
+
+        black: {
+
+            front: "assets/MOCKUP SUETER NEGRO FRONTAL.png",
+
+            back: "assets/MOCKUP SUETER NEGRO TRASERO.png"
+
+        }
+
+    };
+
+    function updateMockup() {
+
+    shirtMockup.src =
+        mockups[editorState.color][editorState.view];
+
+    whiteBtn.classList.toggle(
+        "active",
+        editorState.color === "white"
+    );
+
+    blackBtn.classList.toggle(
+        "active",
+        editorState.color === "black"
+    );
+
+    frontBtn.classList.toggle(
+        "active",
+        editorState.view === "front"
+    );
+
+    backBtn.classList.toggle(
+        "active",
+        editorState.view === "back"
+    );
+
+}
+
+    /* ===========================
+       ABRIR / CERRAR
+    =========================== */
 
     openButton.addEventListener("click", () => {
 
@@ -39,6 +125,48 @@ async function initCustomizer() {
         document.body.style.overflow = "";
 
     });
+
+    /* ===========================
+       COLOR
+    =========================== */
+
+    whiteBtn.addEventListener("click", () => {
+
+        editorState.color = "white";
+
+        updateMockup();
+
+    });
+
+    blackBtn.addEventListener("click", () => {
+
+        editorState.color = "black";
+
+        updateMockup();
+
+    });
+
+    /* ===========================
+       VISTA
+    =========================== */
+
+    frontBtn.addEventListener("click", () => {
+
+        editorState.view = "front";
+
+        updateMockup();
+
+    });
+
+    backBtn.addEventListener("click", () => {
+
+        editorState.view = "back";
+
+        updateMockup();
+
+    });
+
+    updateMockup();
 
 }
 
