@@ -24,6 +24,11 @@ async function initCustomizer() {
 
     const shirtMockup =
         document.getElementById("shirtMockup");
+        const designLayer =
+    document.getElementById("designLayer");
+
+const designUpload =
+    document.getElementById("designUpload");
 
     const openButton =
         document.getElementById("openCustomizer");
@@ -135,6 +140,7 @@ async function initCustomizer() {
         editorState.color = "white";
 
         updateMockup();
+       
 
     });
 
@@ -167,6 +173,33 @@ async function initCustomizer() {
     });
 
     updateMockup();
+    
+    designUpload.addEventListener("change", (event) => {
+
+    console.log("1 - Change detectado");
+
+    const file = event.target.files[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+
+        console.log("2 - Reader terminado");
+
+        designLayer.src = e.target.result;
+
+        designLayer.style.display = "block";
+
+        console.log(designLayer.src);
+
+    };
+
+    reader.readAsDataURL(file);
+
+});
+
 
 }
 
