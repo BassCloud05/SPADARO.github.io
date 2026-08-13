@@ -94,6 +94,24 @@ const designUpload =
 
     shirtMockup.src =
         mockups[editorState.color][editorState.view];
+    
+    const previewStage =
+    document.querySelector(".preview-stage");
+
+if (editorState.color === "black") {
+
+    previewStage.style.background = "#F3F2EF";
+
+    previewStage.style.boxShadow =
+        "0 20px 60px rgba(0,0,0,.12)";
+
+} else {
+
+    previewStage.style.background = "transparent";
+
+    previewStage.style.boxShadow = "none";
+
+}
 
     whiteBtn.classList.toggle(
         "active",
@@ -114,25 +132,6 @@ const designUpload =
         "active",
         editorState.view === "back"
     );
-
-    const preview =
-    document.querySelector(".shirt-preview");
-
-if (editorState.color === "black") {
-
-    preview.style.backgroundColor = "#ECECEC";
-
-    preview.style.boxShadow =
-        "0 20px 45px rgba(0,0,0,.18)";
-
-} else {
-
-    preview.style.backgroundColor = "#181818";
-
-    preview.style.boxShadow =
-        "none";
-
-}
 
 }
 
