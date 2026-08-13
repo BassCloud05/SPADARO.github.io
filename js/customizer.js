@@ -54,11 +54,17 @@ const designUpload =
 
     const editorState = {
 
-        color: "white",
+    color: "white",
 
-        view: "front"
+    view: "front",
 
-    };
+    designX: 50,
+
+    designY: 44,
+
+    dragging: false
+
+};
 
     /* ===========================
        MOCKUPS
@@ -173,7 +179,55 @@ const designUpload =
     });
 
     updateMockup();
-    
+let startX = 0;
+
+let startY = 0;
+
+designLayer.addEventListener("mousedown", (event) => {
+
+    editorState.dragging = true;
+
+    designLayer.style.cursor = "grabbing";
+
+    startX = event.clientX;
+
+    startY = event.clientY;
+
+});
+
+document.addEventListener("mouseup", () => {
+
+    editorState.dragging = false;
+
+    designLayer.style.cursor = "grab";
+
+});
+
+document.addEventListener("mousemove", (event) => {
+
+    if (!editorState.dragging) return;
+
+    const moveX =
+        event.clientX - startX;
+
+    const moveY =
+        event.clientY - startY;
+
+    editorState.designX += moveX;
+
+    editorState.designY += moveY;
+
+    designLayer.style.left =
+        editorState.designX + "px";
+
+    designLayer.style.top =
+        editorState.designY + "px";
+
+    startX = event.clientX;
+
+    startY = event.clientY;
+
+});
     designUpload.addEventListener("change", (event) => {
 
     console.log("1 - Change detectado");
