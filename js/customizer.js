@@ -115,6 +115,25 @@ const designUpload =
         editorState.view === "back"
     );
 
+    const preview =
+    document.querySelector(".shirt-preview");
+
+if (editorState.color === "black") {
+
+    preview.style.backgroundColor = "#ECECEC";
+
+    preview.style.boxShadow =
+        "0 20px 45px rgba(0,0,0,.18)";
+
+} else {
+
+    preview.style.backgroundColor = "#181818";
+
+    preview.style.boxShadow =
+        "none";
+
+}
+
 }
 
     /* ===========================
