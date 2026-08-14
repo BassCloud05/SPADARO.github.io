@@ -1428,3 +1428,151 @@ cursor: grab;
     margin-right: auto;
 }
 }
+/* ==========================
+   EL UNIVERSO SPADARO
+========================== */
+
+.brand-story{
+
+    background:#fff;
+
+    color:#111;
+
+    padding:10px 24px;
+
+}
+
+.brand-story-content{
+
+    max-width:900px;
+
+    margin:auto;
+
+    text-align:center;
+
+}
+
+.brand-story h2{
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    font-size:clamp(2.2rem,4vw,3.4rem);
+
+    font-weight:700;
+
+    letter-spacing:-0.03em;
+
+    text-transform:uppercase;
+
+    margin-bottom:28px;
+
+    color:#111;
+
+}
+
+.brand-story p{
+
+    max-width:620px;
+
+    margin:auto;
+
+    font-size:1rem;
+
+    line-height:1.7;
+
+    color:#555;
+
+}
+
+.brand-features{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:50px;
+
+    margin-top:10px;
+
+    flex-wrap:wrap;
+
+}
+
+.feature{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    font-weight:600;
+
+    color:#111;
+
+    font-size:.92rem;
+
+}
+
+.feature-icon{
+
+    font-size:22px;
+
+}
+@media (max-width:768px){
+
+    .brand-story{
+
+        padding:28px 18px;
+
+    }
+
+    .brand-story h2{
+
+        font-size:1.7rem;
+
+        margin-bottom:10px;
+
+        line-height:1;
+
+    }
+
+    .brand-story p{
+
+        max-width:100%;
+
+        font-size:.9rem;
+
+        line-height:1.55;
+
+        margin-bottom:0;
+
+    }
+
+    .brand-features{
+
+        margin-top:18px;
+
+        gap:12px;
+
+        flex-direction:column;
+
+        align-items:center;
+
+    }
+
+    .feature{
+
+        font-size:.88rem;
+
+        gap:8px;
+
+    }
+
+    .feature-icon{
+
+        font-size:18px;
+
+    }
+
+}
