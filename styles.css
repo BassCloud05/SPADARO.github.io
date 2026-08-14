@@ -1635,3 +1635,6 @@ cursor: grab;
   }
 
 }
+.order-section{
+    display: none;
+}
