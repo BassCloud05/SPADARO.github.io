@@ -139,9 +139,9 @@ Responsive layout
 
     position: absolute;
 
-    left: 0;
+    left: 50%;
 
-    top: 0;
+    top: 44%;
 
     width: 30%;
 
@@ -159,7 +159,7 @@ Responsive layout
 
     z-index: 20;
 
-    transform: translate(0, 0);
+    transform: translate(-50%, -50%);
 
 }
 .tools-panel {

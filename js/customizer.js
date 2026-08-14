@@ -58,11 +58,19 @@ const designUpload =
 
     view: "front",
 
-    designX: 50,
+    designX: 0,
 
-    designY: 44,
+    designY: 0,
 
-    dragging: false
+    scale: 1,
+
+    rotation: 0,
+
+    dragging: false,
+
+    dragStartX: 0,
+
+    dragStartY: 0
 
 };
 
@@ -89,6 +97,19 @@ const designUpload =
         }
 
     };
+
+    function updateDesignTransform() {
+
+    designLayer.style.transform = `
+        translate(
+            calc(-50% + ${editorState.designX}px),
+            calc(-50% + ${editorState.designY}px)
+        )
+        scale(${editorState.scale})
+        rotate(${editorState.rotation}deg)
+    `;
+
+}
 
     function updateMockup() {
 
@@ -201,51 +222,9 @@ let startX = 0;
 
 let startY = 0;
 
-designLayer.addEventListener("mousedown", (event) => {
+designLayer.style.cursor = "grab";
 
-    editorState.dragging = true;
 
-    designLayer.style.cursor = "grabbing";
-
-    startX = event.clientX;
-
-    startY = event.clientY;
-
-});
-
-document.addEventListener("mouseup", () => {
-
-    editorState.dragging = false;
-
-    designLayer.style.cursor = "grab";
-
-});
-
-document.addEventListener("mousemove", (event) => {
-
-    if (!editorState.dragging) return;
-
-    const moveX =
-        event.clientX - startX;
-
-    const moveY =
-        event.clientY - startY;
-
-    editorState.designX += moveX;
-
-    editorState.designY += moveY;
-
-    designLayer.style.left =
-        editorState.designX + "px";
-
-    designLayer.style.top =
-        editorState.designY + "px";
-
-    startX = event.clientX;
-
-    startY = event.clientY;
-
-});
     designUpload.addEventListener("change", (event) => {
 
     console.log("1 - Change detectado");
@@ -258,15 +237,22 @@ document.addEventListener("mousemove", (event) => {
 
     reader.onload = (e) => {
 
-        console.log("2 - Reader terminado");
+    designLayer.src = e.target.result;
 
-        designLayer.src = e.target.result;
+    designLayer.style.display = "block";
 
-        designLayer.style.display = "block";
+    editorState.designX = 0;
 
-        console.log(designLayer.src);
+    editorState.designY = 0;
 
-    };
+    designLayer.style.left = "50%";
+
+    designLayer.style.top = "44%";
+
+    designLayer.style.transform =
+        "translate(-50%, -50%)";
+
+};
 
     reader.readAsDataURL(file);
 
