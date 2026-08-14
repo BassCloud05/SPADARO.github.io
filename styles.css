@@ -427,7 +427,9 @@ body.theme-dark .button.ghost {
 .order-section {
   padding: clamp(58px, 8vw, 112px) clamp(20px, 6vw, 72px);
 }
-
+.collection{
+    padding-top: 15px;
+}
 .collection {
     position: relative;
     overflow: hidden;
@@ -1623,4 +1625,13 @@ cursor: grab;
     font-weight: normal;
     letter-spacing: 0;
     text-transform: none;
+}
+@media (min-width: 769px) {
+
+  .brand-story{
+    margin-top: 60px;
+    padding-top: 70px;
+    padding-bottom: 80px;
+  }
+
 }
