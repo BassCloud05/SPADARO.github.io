@@ -1,3 +1,9 @@
+@font-face {
+    font-family: "Birds of Paradise";
+    src: url("assets/Birds\ of\ Paradise\ ©\ PERSONAL\ USE\ ONLY.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
 :root {
   --ink: #161412;
   --muted: #6c625b;
@@ -450,7 +456,7 @@ body.theme-dark .collection-emblem {
 
 .section-heading {
   position: relative;
-  max-width: 820px;
+  max-width: 100%;
   margin-bottom: 28px;
 }
 
@@ -615,7 +621,7 @@ body.theme-dark .collection-emblem {
 
 .product-info p {
   margin: 0;
-  color: color: #666;
+  color: #666;
   line-height: 1.58;
 }
 
@@ -639,7 +645,7 @@ body.theme-dark .collection-emblem {
 .product-options label {
   display: grid;
   gap: 6px;
-  color: color: #555;
+  color: #555;
   font-size: 0.78rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -1595,4 +1601,26 @@ cursor: grab;
 
 .collection .section-heading p{
     color:#666;
+}
+.collection .section-heading h2{
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    font-weight:700;
+
+    font-size:clamp(1.8rem,3.2vw,2.8rem);
+
+    letter-spacing:-0.04em;
+
+    text-transform:uppercase;
+
+    color:#111;
+
+}
+.creazione{
+    font-family: "Birds of Paradise", cursive;
+    font-size: 1.15em;
+    font-weight: normal;
+    letter-spacing: 0;
+    text-transform: none;
 }
