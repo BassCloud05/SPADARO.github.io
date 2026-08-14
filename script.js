@@ -99,11 +99,8 @@ const money = new Intl.NumberFormat("es-CO", {
   maximumFractionDigits: 0,
 });
 
-function setTheme(theme) {
-  const isDark = theme === "dark";
-  document.body.classList.toggle("theme-dark", isDark);
-  themeToggle.setAttribute("aria-label", isDark ? "Activar modo claro" : "Activar modo oscuro");
-  localStorage.setItem("spadaro-theme", theme);
+function setTheme() {
+    document.body.classList.add("theme-dark");
 }
 
 function getProductImage(product, color, view) {
@@ -453,15 +450,13 @@ document.querySelectorAll("[data-cart-open]").forEach((button) => {
 
 document.querySelector("[data-cart-close]").addEventListener("click", closeCart);
 overlay.addEventListener("click", closeCart);
-themeToggle.addEventListener("click", () => {
-  setTheme(document.body.classList.contains("theme-dark") ? "light" : "dark");
-});
+
 
 window.addEventListener("scroll", () => {
   header.classList.toggle("scrolled", window.scrollY > 16);
 });
 
-setTheme(localStorage.getItem("spadaro-theme") || "dark");
+setTheme();
 renderProducts();
 renderCart();
 updateProductStatus();
