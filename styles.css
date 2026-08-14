@@ -683,7 +683,12 @@ body.theme-dark .fit-section {
   background: #050505;
   color: #fffaf3;
 }
-
+.fit-copy h2{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: .95;
+}
 .fit-copy p {
   color: rgba(255, 250, 243, 0.72);
 }
