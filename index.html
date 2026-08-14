@@ -50,11 +50,19 @@
 
     <main>
       <section class="hero" id="inicio">
-        <img
-          class="hero-image"
-          src="assets/spadaro-archivio-01-hero.png"
-          alt="Collage artístico de arte, arquitectura y simbolismo para ARCHIVIO 01 de SPADARO"
-        />
+        <picture class="hero-picture">
+
+    <source
+        media="(max-width: 768px)"
+        srcset="assets/portada-mobile.jpg">
+
+    <img
+        class="hero-image"
+        src="assets/portada.jpg"
+        alt="Portada SPADARO">
+
+</picture>
+        
         <div class="hero-shade" aria-hidden="true"></div>
         <div class="hero-content">
           <img
