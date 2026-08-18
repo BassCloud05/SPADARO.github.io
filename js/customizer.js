@@ -28,6 +28,11 @@ async function initCustomizer() {
     document.getElementById("designWrapper");    
         const designLayer =
     document.getElementById("designLayer");
+    const designBox =
+    document.getElementById("designBox");
+
+const resizeHandle =
+    document.getElementById("resizeHandle");
 
     designLayer.draggable = false;
 
@@ -71,6 +76,8 @@ const designUpload =
     rotation: 0,
 
     dragging: false,
+
+    resizing: false,
 
     dragStartX: 0,
 
@@ -263,6 +270,7 @@ designLayer.addEventListener("pointerdown", (e) => {
 
 designWrapper.style.display = "block";
 designLayer.style.display = "block";
+designBox.style.display = "block";
 
     editorState.designX = 0;
     editorState.designY = 0;

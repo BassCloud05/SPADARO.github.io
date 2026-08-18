@@ -155,6 +155,41 @@ Responsive layout
 
     pointer-events: auto;
 }
+#designBox{
+    position: relative;
+
+    display: inline-block;
+
+    width: 100%;
+    height: 100%;
+
+    border: 2px solid #C7A37A;
+
+    border-radius: 4px;
+
+    box-sizing: border-box;
+}
+#resizeHandle{
+
+    position:absolute;
+
+    right:-8px;
+
+    bottom:-8px;
+
+    width:16px;
+
+    height:16px;
+
+    background:#C7A37A;
+
+    border:2px solid #111;
+
+    border-radius:50%;
+
+    cursor:nwse-resize;
+
+}
 #designLayer{
     display: block;
     width: 100%;
