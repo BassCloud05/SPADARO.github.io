@@ -135,32 +135,36 @@ Responsive layout
   pointer-events: none;
   filter: drop-shadow(0 30px 55px rgba(0, 0, 0, 0.28));
 }
-#designLayer {
-
+#designWrapper{
     position: absolute;
-
     left: 50%;
-
     top: 44%;
 
     width: 30%;
+    height: auto;
 
-    max-height: 42%;
+    transform: translate(-50%, -50%);
 
-    object-fit: contain;
+    z-index: 20;
 
     display: none;
 
     cursor: grab;
 
-    user-select: none;
+    touch-action: none;
 
     pointer-events: auto;
+}
+#designLayer{
+    display: block;
+    width: 100%;
+    height: auto;
 
-    z-index: 20;
+    object-fit: contain;
 
-    transform: translate(-50%, -50%);
-
+    user-select: none;
+    -webkit-user-drag: none;
+    user-drag: none;
 }
 .tools-panel {
   min-height: 0;

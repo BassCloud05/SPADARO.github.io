@@ -24,8 +24,12 @@ async function initCustomizer() {
 
     const shirtMockup =
         document.getElementById("shirtMockup");
+    const designWrapper =
+    document.getElementById("designWrapper");    
         const designLayer =
     document.getElementById("designLayer");
+
+    designLayer.draggable = false;
 
 const designUpload =
     document.getElementById("designUpload");
@@ -100,16 +104,20 @@ const designUpload =
 
     function updateDesignTransform() {
 
-    designLayer.style.transform = `
-        translate(
-            calc(-50% + ${editorState.designX}px),
-            calc(-50% + ${editorState.designY}px)
-        )
-        scale(${editorState.scale})
-        rotate(${editorState.rotation}deg)
-    `;
+    designWrapper.style.transform = `
+    translate(
+        calc(-50% + ${editorState.designX}px),
+        calc(-50% + ${editorState.designY}px)
+    )
+`;
+
+designLayer.style.transform = `
+    scale(${editorState.scale})
+    rotate(${editorState.rotation}deg)
+`;
 
 }
+
 
     function updateMockup() {
 
@@ -222,8 +230,22 @@ let startX = 0;
 
 let startY = 0;
 
-designLayer.style.cursor = "grab";
 
+
+designLayer.style.cursor = "grab";
+designLayer.addEventListener("pointerdown", (e) => {
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    editorState.dragging = true;
+
+    startX = e.clientX;
+    startY = e.clientY;
+
+    designLayer.style.cursor = "grabbing";
+
+});
 
     designUpload.addEventListener("change", (event) => {
 
@@ -239,25 +261,53 @@ designLayer.style.cursor = "grab";
 
     designLayer.src = e.target.result;
 
-    designLayer.style.display = "block";
+designWrapper.style.display = "block";
+designLayer.style.display = "block";
 
     editorState.designX = 0;
-
     editorState.designY = 0;
+    editorState.scale = 1;
+    editorState.rotation = 0;
 
     designLayer.style.left = "50%";
-
     designLayer.style.top = "44%";
 
-    designLayer.style.transform =
-        "translate(-50%, -50%)";
+    updateDesignTransform();
 
 };
 
-    reader.readAsDataURL(file);
+reader.readAsDataURL(file);
 
 });
 
+// ============================
+// ARRASTRAR DISEÑO
+// ============================
+
+window.addEventListener("pointermove", (e) => {
+
+    if (!editorState.dragging) return;
+
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+
+    editorState.designX += dx;
+    editorState.designY += dy;
+
+    startX = e.clientX;
+    startY = e.clientY;
+
+    updateDesignTransform();
+
+});
+
+window.addEventListener("pointerup", () => {
+
+    editorState.dragging = false;
+
+    designLayer.style.cursor = "grab";
+
+});
 
 }
 
