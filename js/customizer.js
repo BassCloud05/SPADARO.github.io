@@ -242,7 +242,7 @@ let startY = 0;
 
 designLayer.style.cursor = "grab";
 designLayer.addEventListener("pointerdown", (e) => {
-
+     if (editorState.resizing) return;
     e.preventDefault();
     e.stopPropagation();
 
@@ -303,9 +303,49 @@ deleteHandle.addEventListener("click", () => {
     designUpload.value = "";
 
 });
+/* ===========================
+   REDIMENSIONAR DISEÑO
+=========================== */
+
+let resizeStartX = 0;
+let resizeStartScale = 1;
+
+resizeHandle.addEventListener("pointerdown", (e) => {
+
+    e.stopPropagation();
+    e.preventDefault();
+
+    editorState.resizing = true;
+
+    resizeStartX = e.clientX;
+    resizeStartScale = editorState.scale;
+
+});
+
 window.addEventListener("pointermove", (e) => {
 
-    if (!editorState.dragging) return;
+    if (!editorState.resizing) return;
+
+    const delta = e.clientX - resizeStartX;
+
+    let newScale = resizeStartScale + delta * 0.005;
+
+    newScale = Math.max(0.2, Math.min(4, newScale));
+
+    editorState.scale = newScale;
+
+    updateDesignTransform();
+
+});
+
+window.addEventListener("pointerup", () => {
+
+    editorState.resizing = false;
+
+});
+window.addEventListener("pointermove", (e) => {
+
+    if (!editorState.dragging || editorState.resizing) return;
 
     const dx = e.clientX - startX;
     const dy = e.clientY - startY;
