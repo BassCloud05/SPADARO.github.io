@@ -119,10 +119,11 @@ const designUpload =
     )
 `;
 
-designLayer.style.transform = `
+designBox.style.transform = `
     scale(${editorState.scale})
-    rotate(${editorState.rotation}deg)
-`;
+    rotate(${editorState.rotation}deg)`;
+
+designLayer.style.transform = "";
 
 }
 
