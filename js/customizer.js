@@ -30,9 +30,10 @@ async function initCustomizer() {
     document.getElementById("designLayer");
     const designBox =
     document.getElementById("designBox");
-
-const resizeHandle =
+    const resizeHandle =
     document.getElementById("resizeHandle");
+    const deleteHandle =
+    document.getElementById("deleteHandle");
 
     designLayer.draggable = false;
 
@@ -291,7 +292,17 @@ reader.readAsDataURL(file);
 // ============================
 // ARRASTRAR DISEÑO
 // ============================
+deleteHandle.addEventListener("click", () => {
 
+    designLayer.src = "";
+
+    designWrapper.style.display = "none";
+
+    designBox.style.display = "none";
+
+    designUpload.value = "";
+
+});
 window.addEventListener("pointermove", (e) => {
 
     if (!editorState.dragging) return;
