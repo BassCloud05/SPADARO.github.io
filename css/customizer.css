@@ -473,3 +473,28 @@ Responsive layout
     transform: translateY(0);
   }
 }
+#deleteHandle{
+    position:absolute;
+    top:-12px;
+    right:-12px;
+
+    width:28px;
+    height:28px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#d94b4b;
+    color:#fff;
+
+    font-size:16px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    z-index:100;
+}
