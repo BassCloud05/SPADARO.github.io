@@ -243,6 +243,7 @@ let startY = 0;
 
 designLayer.style.cursor = "grab";
 designLayer.addEventListener("pointerdown", (e) => {
+    designBox.classList.add("active");
      if (editorState.resizing) return;
     e.preventDefault();
     e.stopPropagation();
@@ -273,6 +274,7 @@ designLayer.addEventListener("pointerdown", (e) => {
 designWrapper.style.display = "block";
 designLayer.style.display = "block";
 designBox.style.display = "block";
+designBox.classList.add("active");
 
     editorState.designX = 0;
     editorState.designY = 0;
@@ -368,7 +370,19 @@ window.addEventListener("pointerup", () => {
     designLayer.style.cursor = "grab";
 
 });
+document.addEventListener("pointerdown", (e) => {
 
+    if (
+        designWrapper.contains(e.target) ||
+        resizeHandle.contains(e.target) ||
+        deleteHandle.contains(e.target)
+    ) {
+        return;
+    }
+
+    designBox.classList.remove("active");
+
+});
 }
 
 window.addEventListener("load", initCustomizer);

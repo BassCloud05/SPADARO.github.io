@@ -157,17 +157,16 @@ Responsive layout
 }
 #designBox{
     position: relative;
-
     display: inline-block;
 
-    width: 100%;
-    height: 100%;
-
-    border: 2px solid #C7A37A;
-
+    border: 2px solid transparent;
+    transition: border-color .2s ease;
     border-radius: 4px;
 
     box-sizing: border-box;
+}
+#designBox.active{
+    border-color:#C7A37A;
 }
 #resizeHandle{
 
@@ -497,4 +496,16 @@ Responsive layout
     justify-content:center;
 
     z-index:100;
+}
+#deleteHandle,
+#resizeHandle{
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+}
+
+#designBox.active #deleteHandle,
+#designBox.active #resizeHandle{
+    opacity: 1;
+    pointer-events: auto;
 }
