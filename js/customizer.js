@@ -39,6 +39,28 @@ async function initCustomizer() {
 
 const designUpload =
     document.getElementById("designUpload");
+    
+const downloadButton =
+document.getElementById("downloadDesign");
+downloadButton.addEventListener("click", async () => {
+
+    const preview = document.querySelector(".preview-stage");
+
+    const canvas = await html2canvas(preview, {
+        backgroundColor: null,
+        useCORS: true,
+        scale: 3
+    });
+
+    const link = document.createElement("a");
+
+    link.download = "SPADARO-Personalizado.png";
+
+    link.href = canvas.toDataURL("image/png");
+
+    link.click();
+
+});
 
     const openButton =
         document.getElementById("openCustomizer");
@@ -386,3 +408,4 @@ document.addEventListener("pointerdown", (e) => {
 }
 
 window.addEventListener("load", initCustomizer);
+
