@@ -391,6 +391,8 @@ document.addEventListener("pointerdown", (e) => {
 
 });
 whatsappButton.addEventListener("click", async () => {
+    alert("CLICK");
+console.log("CLICK");
 
     const preview = document.querySelector(".preview-stage");
 
