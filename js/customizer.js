@@ -1,7 +1,10 @@
 /* ==========================================
    SPADARO CUSTOMIZER v0.2
 ========================================== */
-
+const supabaseClient = window.supabase.createClient(
+  "https://wxhbphphxbzlbydoadrv.supabase.co",
+  "sb_publishable_zaAn8GjOkRdKXcBkvCeDkA_8rGi3D_F"
+);
 async function initCustomizer() {
 
     const container =
@@ -446,16 +449,47 @@ document.addEventListener("pointerdown", (e) => {
     designBox.classList.remove("active");
 
 });
-whatsappButton.addEventListener("click", () => {
+whatsappButton.addEventListener("click", async () => {
 
-    const mensaje = encodeURIComponent(
-        "Hola SPADARO, quisiera cotizar un diseño personalizado."
-    );
+    const preview = document.querySelector(".preview-stage");
 
-    window.open(
-        `https://wa.me/573104906037?text=${mensaje}`,
-        "_blank"
-    );
+    const canvas = await html2canvas(preview, {
+        backgroundColor: "#ffffff",
+        useCORS: true,
+        scale: 3
+    });
+
+    canvas.toBlob(async (blob) => {
+
+        if (!blob) return;
+
+        const fileName = `design-${Date.now()}.png`;
+
+        const { error } = await supabaseClient.storage
+            .from("designs")
+            .upload(fileName, blob);
+
+        if (error) {
+            alert("No se pudo subir la imagen.");
+            console.error(error);
+            return;
+        }
+
+        const { data } = supabaseClient.storage
+            .from("designs")
+            .getPublicUrl(fileName);
+
+        const mensaje = encodeURIComponent(
+`Hola SPADARO, quisiera cotizar este diseño personalizado.
+
+Diseño:
+${data.publicUrl}`
+        );
+
+        window.location.href =
+            `https://wa.me/573104906037?text=${mensaje}`;
+
+    }, "image/png");
 
 });
 }
