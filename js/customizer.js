@@ -420,15 +420,14 @@ whatsappButton.addEventListener("click", async () => {
             .from("designs")
             .getPublicUrl(fileName);
 
-        const mensaje = encodeURIComponent(
-`Hola SPADARO, quisiera cotizar este diseño personalizado.
+       const mensaje = encodeURIComponent(
+`Hola SPADARO, quisiera cotizar un diseño personalizado.`
+);
 
-Diseño:
-${data.publicUrl}`
-        );
-
-        window.location.href =
-            `https://wa.me/573104906037?text=${mensaje}`;
+window.open(
+    `https://wa.me/573104906037?text=${mensaje}`,
+    "_blank"
+);
 
     }, "image/png");
 
