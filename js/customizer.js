@@ -100,41 +100,7 @@ downloadButton.addEventListener("click", async () => {
 });
 
 
-    canvas.toBlob((blob) => {
-
-    const url = URL.createObjectURL(blob);
-
-    if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-
-        window.open(url, "_blank");
-
-    } else {
-
-        const link = document.createElement("a");
-        link.download = "SPADARO-Personalizado.png";
-        link.href = url;
-        link.click();
-
-    }
-
-    setTimeout(() => URL.revokeObjectURL(url), 5000);
-
-}, "image/png");
-
-if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-
-    window.open(dataURL, "_blank");
-
-} else {
-
-    const link = document.createElement("a");
-    link.download = "SPADARO-Personalizado.png";
-    link.href = dataURL;
-    link.click();
-
-}
-
-});
+   
 
 
     const openButton =
