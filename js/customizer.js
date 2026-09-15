@@ -42,14 +42,17 @@ const designUpload =
     
 const downloadButton =
 document.getElementById("downloadDesign");
+const whatsappButton =
+document.getElementById("continueCustom");
+/*
 downloadButton.addEventListener("click", async () => {
 
     const preview = document.querySelector(".preview-stage");
 
-    const canvas = await html2canvas(preview, {
-        backgroundColor: null,
-        useCORS: true,
-        scale: 3
+    const canvas = await html2canvas(preview,{
+        backgroundColor:null,
+        useCORS:true,
+        scale:3
     });
 
     const link = document.createElement("a");
@@ -61,6 +64,7 @@ downloadButton.addEventListener("click", async () => {
     link.click();
 
 });
+*/
 
     const openButton =
         document.getElementById("openCustomizer");
@@ -403,6 +407,18 @@ document.addEventListener("pointerdown", (e) => {
     }
 
     designBox.classList.remove("active");
+
+});
+whatsappButton.addEventListener("click", () => {
+
+    const mensaje = encodeURIComponent(
+        "Hola SPADARO, quisiera cotizar un diseño personalizado."
+    );
+
+    window.open(
+        `https://wa.me/573104906037?text=${mensaje}`,
+        "_blank"
+    );
 
 });
 }
