@@ -542,3 +542,18 @@ Responsive layout
     opacity: 1;
     pointer-events: auto;
 }
+.mobile-text{
+    display:none;
+}
+
+@media (max-width:768px){
+
+    .desktop-text{
+        display:none;
+    }
+
+    .mobile-text{
+        display:inline;
+    }
+
+}

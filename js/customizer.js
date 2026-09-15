@@ -49,11 +49,55 @@ downloadButton.addEventListener("click", async () => {
 
     const preview = document.querySelector(".preview-stage");
 
-    const canvas = await html2canvas(preview,{
-        backgroundColor:null,
-        useCORS:true,
-        scale:3
+    const canvas = await html2canvas(preview, {
+        backgroundColor: "#ffffff",
+        useCORS: true,
+        scale: 3
     });
+
+    canvas.toBlob(async (blob) => {
+
+        if (!blob) return;
+
+        const file = new File(
+            [blob],
+            "SPADARO-Personalizado.png",
+            {
+                type: "image/png"
+            }
+        );
+
+        // ===== CELULAR =====
+        if (
+            navigator.canShare &&
+            navigator.canShare({ files: [file] })
+        ) {
+
+            await navigator.share({
+                files: [file],
+                title: "SPADARO",
+                text: "Mi diseño personalizado."
+            });
+
+            return;
+        }
+
+        // ===== COMPUTADOR =====
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+
+        link.href = url;
+
+        link.download = "SPADARO-Personalizado.png";
+
+        link.click();
+
+        URL.revokeObjectURL(url);
+
+    }, "image/png");
+
+});
 
 
     canvas.toBlob((blob) => {
